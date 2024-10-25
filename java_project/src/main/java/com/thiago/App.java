@@ -1,9 +1,9 @@
 package com.thiago;
 
-import java.lang.foreign.Arena;
-import java.lang.foreign.Linker;
-import java.lang.foreign.SymbolLookup;
+import java.lang.foreign.*;
+import java.lang.invoke.*;
 
+import com.thiago.helloworld.HelloWorldDotNet;
 import com.thiago.helpers.Point;
 
 public class App {
@@ -19,12 +19,12 @@ public class App {
         System.out.println("--");
 
         System.out.print(
-        """
-        Down call to 'qsort' and upcall to 'InvokeQsort.Qsort.qsortCompare' from Java:
-        """);
-        try { 
+                """
+                        Down call to 'qsort' and upcall to 'InvokeQsort.Qsort.qsortCompare' from Java:
+                        """);
+        try {
             int[] sortedArray = InvokeQsort.qsortTest(
-                new int[] { 0, 9, 3, 4, 6, 5, 1, 8, 2, 7 });
+                    new int[] { 0, 9, 3, 4, 6, 5, 1, 8, 2, 7 });
             System.out.print("Sorted array:");
             for (int num : sortedArray) {
                 System.out.print(num + " ");
@@ -44,14 +44,19 @@ public class App {
         System.out.println("--");
 
         System.out.println("Allocating and printing a string from Java:");
-        AllocateAndPrintString.allocateAndPrintCharArray("Hello, World!");
+        AllocateAndPrintString.allocateAndPrintCharArray("Hello, World!\n");
         System.out.println("--");
 
-        System.out.println("Search for a dll file:");
         Arena arena = Arena.openConfined();
-        SymbolLookup dll = SymbolLookup.libraryLookup("auditcse.dll", arena.scope());
-        // A DLL está na pasta C:\Windows\System32
-        System.out.println("Found auditcse!");
+        System.out.println("Search for a dll file on the System32 folder:");
+        Linker linker = Linker.nativeLinker();
+        SymbolLookup dll = SymbolLookup.libraryLookup("crypt32", arena.scope());
+        System.out.println("Found!");
+        System.out.println("Calling a method from a C# class library");
+        System.out.println(HelloWorldDotNet.add(1, 2));
+        MemorySegment nativeSeg = arena.allocateUtf8String("Thiago");
+        var greet = HelloWorldDotNet.greet(nativeSeg);
+        System.out.println(greet.getUtf8String(0));
         arena.close();
     }
 }
