@@ -9,6 +9,13 @@
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
+            <groupId>net.sf.jni4net</groupId>
+            <artifactId>jni4net-dist</artifactId>
+            <scope>system</scope>
+            <systemPath>C:\Users\Mshimizu\Downloads\jni4net-0.8.8.0-bin\lib\jni4net.j-0.8.8.0.jar</systemPath>
+            <version>0.8.8.0</version>
+        </dependency>
+        <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
             <version>5.15.0</version>

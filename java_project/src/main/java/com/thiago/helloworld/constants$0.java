@@ -35,12 +35,26 @@ final class constants$0 {
         "multiply",
         constants$0.multiply$FUNC
     );
+    static final FunctionDescriptor listDirs$FUNC = FunctionDescriptor.ofVoid(
+        Constants$root.C_POINTER$LAYOUT
+    );
+    static final MethodHandle listDirs$MH = RuntimeHelper.downcallHandle(
+        "listDirs",
+        constants$0.listDirs$FUNC
+    );
     static final FunctionDescriptor greet$FUNC = FunctionDescriptor.of(Constants$root.C_POINTER$LAYOUT,
         Constants$root.C_POINTER$LAYOUT
     );
     static final MethodHandle greet$MH = RuntimeHelper.downcallHandle(
         "greet",
         constants$0.greet$FUNC
+    );
+    static final FunctionDescriptor readFile$FUNC = FunctionDescriptor.ofVoid(
+        Constants$root.C_POINTER$LAYOUT
+    );
+    static final MethodHandle readFile$MH = RuntimeHelper.downcallHandle(
+        "readFile",
+        constants$0.readFile$FUNC
     );
 }
 

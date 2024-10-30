@@ -1,0 +1,25 @@
+$Recycle.Bin
+$WinREAgent
+Arquivos de Programas
+Boot
+Documents and Settings
+Intel
+MBB
+MSOCache
+msys64
+Nova pasta
+OneDriveTemp
+P12.1.33_SSD
+PerfLogs
+Portables
+Program Files
+Program Files (x86)
+ProgramData
+Python312
+Recovery
+SMARTCLIENT
+System Volume Information
+temp
+Users
+Windows
+Windows.old

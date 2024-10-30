@@ -1,5 +1,6 @@
 package com.thiago;
 
+import java.io.File;
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 
@@ -52,11 +53,21 @@ public class App {
         Linker linker = Linker.nativeLinker();
         SymbolLookup dll = SymbolLookup.libraryLookup("crypt32", arena.scope());
         System.out.println("Found!");
+        arena.close();
+        System.out.println("--");
+
+        arena = Arena.openConfined();
         System.out.println("Calling a method from a C# class library");
         System.out.println(HelloWorldDotNet.add(1, 2));
         MemorySegment nativeSeg = arena.allocateUtf8String("Thiago");
         var greet = HelloWorldDotNet.greet(nativeSeg);
-        System.out.println(greet.getUtf8String(0));
+        System.out.println("Listing directories with .NET");
+        MemorySegment nativeSeg2 = arena.allocateUtf8String("C:\\");
+        HelloWorldDotNet.listDirs(nativeSeg2);
+        System.out.println("Printing file content with .NET");
+        MemorySegment nativeSeg3 = arena
+                .allocateUtf8String("C:\\Users\\Mshimizu\\Projetos\\java_fmi_test\\java_project\\dirs.txt");
+        HelloWorldDotNet.readFile(nativeSeg3);
         arena.close();
     }
 }

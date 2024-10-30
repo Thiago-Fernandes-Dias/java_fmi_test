@@ -33,4 +33,26 @@ public class Class1
         // Return pointer
         return sumPointer;
     }
+
+    [UnmanagedCallersOnly(EntryPoint = "listDirs")]
+    public static void ListDirs(IntPtr pathPointer)
+    {
+        string? path = Marshal.PtrToStringAnsi(pathPointer);
+        if (path is null)
+            return;
+        DirectoryInfo[] dirs = new DirectoryInfo(path).GetDirectories();
+        using StreamWriter sw = new("dirs.txt");
+        foreach (var dir in dirs)
+            sw.WriteLine(dir.Name);
+    }
+
+    [UnmanagedCallersOnly(EntryPoint = "readFile")]
+    public static void ReadFile(IntPtr pathPointer)
+    {
+        string? path = Marshal.PtrToStringAnsi(pathPointer);
+        if (path is null)
+            return;
+        string content = File.ReadAllText(@$"{path}");
+        Console.WriteLine(content);
+    }
 }

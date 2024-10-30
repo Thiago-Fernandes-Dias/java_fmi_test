@@ -65,6 +65,22 @@ public class HelloWorldDotNet  {
             throw new AssertionError("should not reach here", ex$);
         }
     }
+    public static MethodHandle listDirs$MH() {
+        return RuntimeHelper.requireNonNull(constants$0.listDirs$MH,"listDirs");
+    }
+    /**
+     * {@snippet :
+     * void listDirs(char* path);
+     * }
+     */
+    public static void listDirs(MemorySegment path) {
+        var mh$ = listDirs$MH();
+        try {
+            mh$.invokeExact(path);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
     public static MethodHandle greet$MH() {
         return RuntimeHelper.requireNonNull(constants$0.greet$MH,"greet");
     }
@@ -77,6 +93,22 @@ public class HelloWorldDotNet  {
         var mh$ = greet$MH();
         try {
             return (java.lang.foreign.MemorySegment)mh$.invokeExact(name);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle readFile$MH() {
+        return RuntimeHelper.requireNonNull(constants$0.readFile$MH,"readFile");
+    }
+    /**
+     * {@snippet :
+     * void readFile(char* path);
+     * }
+     */
+    public static void readFile(MemorySegment path) {
+        var mh$ = readFile$MH();
+        try {
+            mh$.invokeExact(path);
         } catch (Throwable ex$) {
             throw new AssertionError("should not reach here", ex$);
         }

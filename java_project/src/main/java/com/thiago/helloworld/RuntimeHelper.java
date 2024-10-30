@@ -35,7 +35,7 @@ final class RuntimeHelper {
             (size, align) -> MemorySegment.allocateNative(size, align, SegmentScope.auto());
 
     static {
-        System.load("C:\\Users\\Mshimizu\\Projetos\\HelloWorldlib\\ClassLibrary1\\bin\\Release\\net8.0\\win-x64\\native\\helloworldlib.dll");
+        System.load("C:\\Users\\Mshimizu\\Projetos\\java_fmi_test\\HelloWorldDotnetLib\\ClassLibrary1\\bin\\Release\\net8.0\\win-x64\\native\\helloworldlib.dll");
         SymbolLookup loaderLookup = SymbolLookup.loaderLookup();
         SYMBOL_LOOKUP = name -> loaderLookup.find(name).or(() -> LINKER.defaultLookup().find(name));
     }
